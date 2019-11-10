@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ApiService } from './api.service';
 
 @Component({
@@ -11,24 +11,34 @@ export class MembersDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private api: ApiService) { }
   selected_member = { name: '', surname: ''};
-
+  selected_id;
   ngOnInit() {
-    this.loadMember();
+    this.route.paramMap.subscribe((param: ParamMap) => {
+      let id = parseInt(param.get('id'));
+      this.selected_id = id;
+      this.loadMember(id);
+    });
   }
 
-  loadMember() {
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
-
+  loadMember(id) {
     this.api.getMember(id).subscribe(
       data => {
-        console.log(data);
         this.selected_member = data;
       },
       error => {
         console.log("Aconteceu um erro", error.message);
       }
     );
+  };
 
+  update(){
+    this.api.updateMember(this.selected_member).subscribe(
+      data => {
+        this.selected_member = data;
+      },
+      error => {
+        console.log("Aconteceu um erro", error.message);
+      }
+    );
   }
 }
