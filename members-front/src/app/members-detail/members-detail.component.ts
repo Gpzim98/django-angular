@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ApiService } from './api.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-members-detail',
@@ -9,9 +10,15 @@ import { ApiService } from './api.service';
 })
 export class MembersDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private api: ApiService) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private api: ApiService, 
+    private router: Router,
+    private appComponente: AppComponent) { }
+
   selected_member = { name: '', surname: ''};
   selected_id;
+
   ngOnInit() {
     this.route.paramMap.subscribe((param: ParamMap) => {
       let id = parseInt(param.get('id'));
@@ -23,7 +30,7 @@ export class MembersDetailComponent implements OnInit {
   loadMember(id) {
     this.api.getMember(id).subscribe(
       data => {
-        this.selected_member = data;
+        this.appComponente.members ;
       },
       error => {
         console.log("Aconteceu um erro", error.message);
@@ -40,5 +47,10 @@ export class MembersDetailComponent implements OnInit {
         console.log("Aconteceu um erro", error.message);
       }
     );
+  };
+
+
+  newMember(){
+    this.router.navigate(['new-member']);
   }
 }
