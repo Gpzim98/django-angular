@@ -30,7 +30,7 @@ export class MembersDetailComponent implements OnInit {
   loadMember(id) {
     this.api.getMember(id).subscribe(
       data => {
-        this.appComponente.members ;
+        this.selected_member = data;
       },
       error => {
         console.log("Aconteceu um erro", error.message);
@@ -48,6 +48,25 @@ export class MembersDetailComponent implements OnInit {
       }
     );
   };
+
+  delete(){
+    this.api.deleteMember(this.selected_id).subscribe(
+      data => {
+        let index;
+
+        this.appComponente.members.forEach((e, i) =>{
+          if(e.id == this.selected_id)
+            index = i;
+        });
+
+        this.appComponente.members.splice(index, 1);
+      },
+      error => {
+        console.log("Aconteceu um erro", error.message);
+      }
+    );
+  };
+
 
 
   newMember(){
