@@ -1,6 +1,10 @@
 <h3>Member Detail Component</h3>
 <span>Você esta editando</span>: {{ selected_member.name }} - {{ selected_member.surname }}
 
+<span class="image left">
+    <img src="{{ selected_member.photo }}" alt="Foto de {{ selected_member.name }}">
+</span>
+
 <input type="text" [(ngModel)]="selected_member.id" readonly> <br>
 <input type="text" [(ngModel)]="selected_member.name"> <br>
 <input type="text" [(ngModel)]="selected_member.surname"><br>
