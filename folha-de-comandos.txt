@@ -15,3 +15,7 @@ python manage.py runserver
 python manage.py startapp appname
 
 
+Deploy
+sudo /etc/init.d/nginx restart
+sudo systemctl restart apache2
+sudo systemctl restart djangovps.service
