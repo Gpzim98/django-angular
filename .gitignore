@@ -2,3 +2,4 @@ venv
 db.sqlite3
 members_profile
 __pycache__
+static
