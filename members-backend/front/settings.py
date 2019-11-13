@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'front.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myproject',
+        'NAME': 'djangodb',
         'USER': 'django',
         'PASSWORD': 'djangosenha',
         'HOST': 'localhost',
